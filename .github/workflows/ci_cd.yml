@@ -20,13 +20,18 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install bandit
 
       - name: Run tests
         run: pytest
 
       - name: Run security scan
-        run: bandit -c .bandit -r .
+        run: |
+          pwd
+          ls -la
+          bandit -c .bandit -r .
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
